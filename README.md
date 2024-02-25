@@ -1,7 +1,7 @@
 # Install with:
 `cargo install textsweeper`
 # Run:
-`textsweeper`
+`textsweeper {easy | normal | hard}`
 # Controls
 - ESC - Quit
 - SPACE - Open Cell
