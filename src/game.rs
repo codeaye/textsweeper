@@ -128,10 +128,8 @@ impl Game {
                 }
             }
 
-            KeyCode::Char('r')
-                if self.state == GameState::Playing || self.state == GameState::Lost =>
-            {
-                self.reset()
+            KeyCode::Char('r') if self.state != GameState::PreInit => {
+                self.reset();
             }
 
             _ => (),
