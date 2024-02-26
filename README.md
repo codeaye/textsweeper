@@ -4,6 +4,6 @@
 `textsweeper {easy | normal | hard}`
 # Controls
 - ESC - Quit
-- SPACE - Open Cell
+- SPACE - Open/Chord Cell
 - WASD / ARROWS - Move around
 - F - Flag
