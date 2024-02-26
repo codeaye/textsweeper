@@ -98,6 +98,38 @@ impl Board {
     pub fn open(&mut self, index: usize) -> bool {
         let curr = &self.data[index];
         match curr {
+            // This mimics "middle-clicking" a cell in mouse-controlled
+            // versions of the game.
+            Cell {
+                state: CellState::Open,
+                ty: CellType::Neighbouring(neighbouring_mines),
+            } => {
+                if curr.ty == CellType::Neighbouring(0) {
+                    return false;
+                }
+
+                let mut neighbouring_flags = 0;
+
+                for neighbour in self.get_neighbours(index) {
+                    if self.data[neighbour].state == CellState::Flagged {
+                        neighbouring_flags += 1;
+                    }
+                }
+
+                // If all mines seem flagged, open remaining hidden cells.
+                if neighbouring_flags == *neighbouring_mines {
+                    for neighbour in self.get_neighbours(index) {
+                        if self.data[neighbour].state == CellState::Hidden {
+                            if self.open(neighbour) {
+                                return true;
+                            }
+                        }
+                    }
+
+                    return false;
+                }
+            }
+
             Cell {
                 state: CellState::Hidden,
                 ty: CellType::Empty,
