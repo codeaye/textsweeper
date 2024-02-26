@@ -134,6 +134,7 @@ impl Board {
         match &self.data[index].state {
             CellState::Flagged => {
                 self.data[index].state = CellState::Hidden;
+                self.num_used_flags -= 1;
                 if self.mines_locs.contains(&index) {
                     self.mines_flagged -= 1;
                 }
